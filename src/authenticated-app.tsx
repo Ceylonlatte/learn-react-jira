@@ -20,6 +20,7 @@ import { Button, Dropdown, Menu } from "antd";
 
 export const AuthenticatedApp = () => {
   const { logout, user } = useAuth();
+
   return (
     <Container>
       <Header between={true}>
@@ -33,7 +34,7 @@ export const AuthenticatedApp = () => {
             overlay={
               <Menu>
                 <Menu.Item key={"logout"}>
-                  <Button type={"link"} onClick={logout}>
+                  <Button onClick={logout} type={"link"}>
                     登出
                   </Button>
                 </Menu.Item>
