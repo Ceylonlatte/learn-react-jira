@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 export const isFalsy = (value: any) => (value === 0 ? false : !value);
 
 // 在一个函数里，改变传入的对象本身是不好的
@@ -33,4 +33,23 @@ export const useDebounce = <T>(value: T, delay: number): T => {
   }, [value, delay]);
 
   return debouncedValue;
+};
+
+export const useDocumentTitle = (
+  title: string,
+  keepOnUnmount: boolean = true
+) => {
+  const oldTitle = useRef(document.title).current;
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
+  useEffect(() => {
+    return () => {
+      if (!keepOnUnmount) {
+        document.title = oldTitle;
+      }
+    };
+  }, [keepOnUnmount, oldTitle]);
 };
